@@ -1,0 +1,133 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    background: linear-gradient(to bottom left, #e9f1fe 50%, #bef7b3 50%);
+    min-height: 680px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 90px;
+    margin-left: 270px !important;
+}
+
+.debut {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    font-size: 21px !important;
+    color: #34f20e;
+    height: 40px;
+    width: 110px;
+    border-radius: 5px !important;
+    border: red solid 0.5px;
+}
+
+.bg {
+    background-color: #fff;
+}
+
+::placeholder {
+    background-color: #e9f1fe !important;
+    color: #34f20e;
+    font-weight: bolder;
+    opacity: 2;
+}
+
+input {
+    border: none;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    color: #34f20e;
+    height: 35px;
+    align-items: center;
+    background-color: #e9f1fe;
+}
+
+i {
+    color: #20930a;
+}
+
+
+/* partie enregistrement */
+
+.menu a {
+    color: #20930a !important;
+}
+
+@media only screen and (max-width:600px) {
+    * {
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    .container-fluid {
+        background: linear-gradient(to bottom left, #e9f1fe 50%, #bef7b3 50%);
+        /* min-height: 180px; */
+    }
+    header {
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column;
+    }
+    .debut {
+        align-items: center;
+    }
+    button {
+        font-size: 5px !important;
+        color: #34f20e;
+        height: 10px;
+        width: 27.5px;
+        border-radius: 2px !important;
+        border: red solid 0.5px;
+    }
+    .bg {
+        background-color: #fff;
+    }
+     ::placeholder {
+        background-color: #e9f1fe !important;
+        color: #34f20e;
+        /* font-weight: bolder; */
+        opacity: 1;
+    }
+    input {
+        border: none;
+    }
+    footer {
+        display: flex;
+        justify-content: center;
+        color: #34f20e;
+        height: 8.75px;
+        align-items: center;
+        background-color: #e9f1fe;
+        font-size: small;
+    }
+    i {
+        color: #20930a;
+    }
+    /* partie enregistrement */
+    .menu a {
+        color: #20930a !important;
+    }
+    .d-flex {
+        display: inline !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+    .d-flex img {
+        max-width: 100px !important;
+        max-height: 120px !important;
+    }
+}
