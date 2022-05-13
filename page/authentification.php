@@ -1,3 +1,7 @@
+<?php 
+include("./connexion.php")
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +23,7 @@
         <header>
 
             <img src="../images/logo-bf-removebg-preview.png" class="img-fluid m-0 col-md-1" alt="">
-            <a href="../index.html" class=" text-decoration-none text-success fs-4">accueil</a>
+            <a href="../index.php" class=" text-decoration-none text-success fs-4">accueil</a>
         </header>
         <div class=" d-flex justify-content-md-between">
 

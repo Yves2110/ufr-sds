@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("./connexion.php")
 
 ?>
@@ -9,11 +9,10 @@ include("./connexion.php")
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enregistrement</title>
+    <title>Listes des étudiants</title>
     <link rel="stylesheet" href="../style/inscription.css">
     <link rel="stylesheet" href="../style/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -40,16 +39,16 @@ include("./connexion.php")
         <p class="text-center mb-5 text-success fs-2">Listes</p>
         <div class="bg-light">
             <?php
-            
+
             $bd = new PDO("mysql:host=localhost;dbname=appli-sds", "root", "");
             $bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-            $result = $bd->query("SELECT * FROM listes ORDER BY nom ASC");
-    
+
+            $result = $bd->query('SELECT * FROM etudiants INNER JOIN tuteur_legal WHERE etudiants.tut_telephone = tuteur_legal.telephone ORDER BY nom ASC');
+
             if (!$result) {
-              echo "la recuperation a echoue";
+                echo "la recuperation a echoue";
             } else {
-              $nombre = $result->rowCount();
+                $nombre = $result->rowCount();
             ?>
 
                 <h4 class="text-center text-uppercase text-success">Vous avez
@@ -65,26 +64,26 @@ include("./connexion.php")
                         <th>Numéro tuteur</th>
                         <th></th>
                     </tr>
-                    <?php 
-                while ($ligne = $result->fetch()){
-                    
-          echo "<tr>";
-            echo "<td>" . $ligne["nom"] . "</td>";
-            echo "<td>" . $ligne["prenom"] . "</td>";
-            echo "<td>" . $ligne["naissance"] . "</td>";
-            echo "<td>" . $ligne["email"] . "</td>";
-            echo "<td>" . $ligne["telephone"] . "</td>";
-            echo "<td>" . $ligne["tuteur"] . "</td>";
-            echo "<td>" . $ligne["numero_tuteur"] . "</td>";
-            echo  "<td><a href='./icon.php?id=".$ligne["email"]."' id='supp'> <i class='fa-solid fa-pen' style='color:#34f20e;'></i></i> </a><a href='./icon.php?id=".$ligne["email"]."' id='supp'> <i class='fa-solid fa-trash' style='color:#34f20e;'></i></i> </a>
-          </td>";
-            echo "</tr>";
+                    <?php
+                    while ($ligne = $result->fetch()) {
 
-                }
-                ?>
+                        echo "<tr>";
+                        echo "<td>" . $ligne["nom"] . "</td>";
+                        echo "<td>" . $ligne["prenom"] . "</td>";
+                        echo "<td>" . $ligne["date_de_naissance"] . "</td>";
+                        echo "<td>" . $ligne["email"] . "</td>";
+                        echo "<td>" . $ligne["telephone"] . "</td>";
+                        echo "<td>" . $ligne["nom_et_prenom"] . "</td>";
+                        echo "<td>" . $ligne["tut_telephone"] . "</td>";
+                        echo  "<td><a href='./modifying.php?id=" . $ligne["email"] . "' id='supp'> <i class='fa-solid fa-pen' style='color:#34f20e;'></i></i> </a>
+                        <a href='./delete.php?id=" . $ligne["email"] . "' id='delete'> <i class='fa-solid fa-trash' style='color:#34f20e;'></i></i> </a>
+                        </td>";
+                        echo "</tr>";
+                    }
+                    ?>
                 </table>
-                <?php
-        }
+            <?php
+            }
             ?>
         </div>
         <hr>
@@ -101,7 +100,29 @@ include("./connexion.php")
         Copyright-UFR/SDS
     </footer>
 
+    <script>
+        let supprimer = document.getElementById("delete");
+        supprimer.addEventListener('click', (e) => {
+            if (confirm("supprimer?")) {
+                return true;
+            } else {
+                e.preventDefault();
+                return false;
+            }
 
+        });
+
+        let modifier = document.getElementById("supp");
+        modifier.addEventListener('click', (e) => {
+            if (confirm("voulez-vous modifier?")) {
+                return true;
+            } else {
+                e.preventDefault();
+                return false;
+            }
+
+        });
+    </script>
 
 </body>
 

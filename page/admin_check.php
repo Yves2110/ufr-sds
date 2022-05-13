@@ -10,7 +10,8 @@ $stmt->execute(array($email,$mdp));
 $user = $stmt->fetch();
 
 if (!$user){
-    header('location:./inscription.php?inv=3');
+   
+    header('location:./authentification.php?inv=3');
 }
  else {
     header('location:./enregistrement.php');

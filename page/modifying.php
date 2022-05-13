@@ -78,15 +78,37 @@
 
 
 <body>
+<?php
+$id= $_GET['id'];
 
-  <?php
+
+
+$result = $bd->query("SELECT * FROM etudiants WHERE email='$id'");
+
+if (!$result) {
+  echo "la recuperation a echoue";
+} else {
+  $nombre = $result->rowCount();
+$ligne = $result->fetch();
+
+
+$nom= $ligne["nom"];
+$prenom=  $ligne["prenom"];
+$date_de_naissance=  $ligne["date_de_naissance"];
+$tut_telephone=  $ligne["tut_telephone"];
+$telephone=  $ligne["telephone"];
+$email=  $ligne["email"];
+}
+
+?>
+  <!-- <?php
 
   $bd = new PDO("mysql:host=localhost;dbname=appli-sds", "root", "");
   $bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $result = $bd->query("SELECT * FROM tuteur_legal ORDER BY nom_et_prenom ASC");
   // var_dump($result->fetch());
-  ?>
+  ?> -->
 
   <div class="container-fluid">
     <header>
@@ -127,24 +149,10 @@
           </div>
         </form>
         <div class="m-4">
-          <!-- <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Choix de tuteur</button>
-                     <div id="myDropdown" class="dropdown-content">
-                 <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder='Search..' .id="myInput" onkeyup="filterFunction()">
-                   <a href="#about">About</a>
-                   <a href="#base">Base</a>
-                   <a href="#blog">Blog</a>
-                   <a href="#contact">Contact</a>
-                   <a href="#custom">Custom</a>
-                   <a href="#support">Support</a>
-                   <a href="#tools">Tools</a>
-                 </div>
-                  </div> -->
-          <form action="traitement.php" method="post">
+          <form action="traitement_modify.php" method="post">
 
             <select name="tut_telephone" id="">
-              <option value="">Choix de tuteur</option>
+              <option value=""><?php echo $tut_telephone;?></option>
               <?php
               while ($ligne = $result->fetch()) {
                 echo "<option value = '$ligne[telephone]'>$ligne[nom_et_prenom]</option>";
@@ -155,30 +163,30 @@
         </div>
         <div class="m-4">
           <i class="fa-solid fa-clipboard-user"></i>
-          <input type="text" name="nom" id="" placeholder="Nom" required="">
+          <input type="text" name="nom" id="" placeholder="Nom" required="" value="<?php echo $nom;?>">
         </div>
         <div class="m-4">
           <i class="fa-solid fa-user"></i>
-          <input type="text" name="prenom" id="" placeholder="Prénom" required="">
+          <input type="text" name="prenom" id="" placeholder="Prénom" required="" value="<?php echo $prenom;?>">
         </div>
         <div class="m-4">
           <i class="fa-solid fa-envelope-open-text"></i>
-          <input type="email" name="email" id="" placeholder="E-mail" required="">
+          <input type="email" name="email" id="" placeholder="E-mail" required=""value="<?php echo $email;?>">
         </div>
         <div class="m-4">
           <i class="fa-solid fa-phone"></i>
-          <input type="tel" name="telephone" id="" placeholder="Téléphone" required="">
+          <input type="tel" name="telephone" id="" placeholder="Téléphone" required=""value="<?php echo $telephone;?>">
         </div>
 
         <div class="m-4">
           <i class="fa-solid fa-cake-candles"></i>
-          <input type="datetime"  name="date_de_naissance" id="" placeholder="ex:2000-12-21" required="">
+          <input type="datetime"  name="date_de_naissance" id="" placeholder="ex:2000-12-21" required="" value="<?php echo $date_de_naissance;?>">
         </div>
 
 
         <div class=" m-4">
           <i class="fa-solid fa-circle-plus"></i>
-          <input type="submit" value="Ajouter" style="color: #34f20e;; width: 100px; font-weight: bolder;">
+          <input type="submit" name="modify" value="Ajouter" style="color: #34f20e;; width: 100px; font-weight: bolder;">
         </div>
         </form>
       </div>
@@ -192,31 +200,6 @@
   <footer>
     Copyright-UFR/SDS
   </footer>
-
-
-  <script>
-    /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function filterFunction() {
-      let input, filter, ul, li, a, i;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      div = document.getElementById("myDropdown");
-      a = div.getElementsByTagName("a");
-      for (i = 0; i < a.length; i++) {
-        txtValue = a[i].textContent || a[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          a[i].style.display = "";
-        } else {
-          a[i].style.display = "none";
-        }
-      }
-    }
-  </script>
 
 
 </body>
