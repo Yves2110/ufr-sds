@@ -128,7 +128,7 @@ $email=  $ligne["email"];
       </div>
 
     </header>
-    <p class="text-center mb-5 text-success fs-2">Enregistrement</p>
+    <p class="text-center mb-5 text-success fs-2">Modification d'un enregistrement</p>
     <div class=" d-flex justify-content-md-between">
 
       <img src="../images/Logo_Université_de_Ouagadougou-removebg-preview.png" class="img-fluid col-md-3" style="width: 250px; height: 300px; margin-left: 35px;" alt="">
@@ -149,10 +149,10 @@ $email=  $ligne["email"];
           </div>
         </form>
         <div class="m-4">
-          <form action="traitement_modify.php" method="post">
+          <form action="traitement_modify.php?mod=<?php echo $id;?>" method="post">
 
             <select name="tut_telephone" id="">
-              <option value=""><?php echo $tut_telephone;?></option>
+              <option value="" type="tel" ><?php echo $tut_telephone;?></option>
               <?php
               while ($ligne = $result->fetch()) {
                 echo "<option value = '$ligne[telephone]'>$ligne[nom_et_prenom]</option>";
@@ -186,7 +186,7 @@ $email=  $ligne["email"];
 
         <div class=" m-4">
           <i class="fa-solid fa-circle-plus"></i>
-          <input type="submit" name="modify" value="Ajouter" style="color: #34f20e;; width: 100px; font-weight: bolder;">
+          <input type="submit" name="modify" value="Modifier" style="color: #34f20e;; width: 100px; font-weight: bolder;">
         </div>
         </form>
       </div>
